@@ -13,7 +13,7 @@
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <img class="footer__social-web-img" src="../img/social/009-vk.png" alt="">
+                        <img src="../img/social/discord.png" class="footer__social-web-img" alt="">
                     </a>
                 </div>
 
@@ -25,7 +25,7 @@
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <img class="footer__social-web-img" src="../img/social/013-twitter-1.png" alt="">
+                        <img src="../img/social/009-vk.png" class="footer__social-web-img" alt="">
                     </a>
                 </div>
 
@@ -48,7 +48,7 @@
     </div>
 
     <div class="footer__copyright">
-        © 2009–2020, ООО «FOODDAY», официальный сайт
+        © 2009–2021 «OnlineStudy», официальный сайт
         <a href="agreement.php" class="footer__copyright-agreement">Пользовательское соглашение</a>
     </div>
 </footer>
