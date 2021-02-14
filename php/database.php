@@ -1,19 +1,16 @@
 <?php
 
 define("HOST", "localhost"); 
-define("USER", "root"); 
-define("PASSWORD", ""); 
-define("BD", ""); 
+define("USER", "mysql"); 
+define("PASSWORD", "mysql"); 
+define("BD", "onlinestudy"); 
 
 function connect_mysql($HOST = HOST, $USER = USER, $PASSWORD = PASSWORD, $BD = BD) {
-
     $link = mysqli_connect($HOST, $USER, $PASSWORD, $BD);
-
     if ($link == false) {
         return false;
     }
     else return $link;
-
 }
 
 //---------------------------------------------------------------------------------------------------------

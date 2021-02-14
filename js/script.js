@@ -158,43 +158,39 @@ function createHTML(htmlStr) {
 
 function createMessage(title, text, time = 5, type = false) {
     if (!document.getElementById("popup-container")) return false;
-    if (!document.querySelector('.popup-message.hide')) return false;
 
-    var popup_container = document.getElementById("popup-container");
-    var popup_body = document.getElementById("popup-body");
+    var popup_message_str = `
+        <div class="popup-message show">
+            <div class="popup-message__header">
+                <strong class="popup-message__title">${title}</strong>
+                <button class="popup-message__close-button" data-popup="button">X</button>
+            </div>
+            <div class="popup-message__content">${text}</div>
+        </div>
+    
+    `;
 
-    var template_message = document.querySelector('.popup-message.hide');
-    var popup_message = template_message.cloneNode(true);
-
-    popup_body.append(popup_message);
-    var popup_title = popup_message.querySelector(".popup-message__title");
-    var popup_content = popup_message.querySelector(".popup-message__content");
+    var popup_message = createHTML(popup_message_str);
+    var popup_message_body = popup_message.querySelector(".popup-message");
     var popup_close = popup_message.querySelector(".popup-message__close-button");
+    var popup_body = document.getElementById("popup-body");
+    popup_body.append(popup_message);
 
-    popup_title.innerHTML = title;
-    popup_content.innerHTML = text;
-
-    popup_message.classList.remove("hide");
-    setTimeout(function() {
-        popup_message.classList.add("show");
-    }, 100);
-
-    if (type == "danger") popup_message.classList.add("danger");
-    if (type == "success") popup_message.classList.add("success");
+    if (type == "danger") popup_message_body.classList.add("danger");
+    if (type == "success") popup_message_body.classList.add("success");
 
     popup_close.onclick = function(e) {
-        var popup_message = e.target.closest('.popup-message');
-        popup_message.classList.remove("show");
+        popup_message_body.classList.remove("show");
         setTimeout(function() {
-            popup_message.remove();
+            popup_message_body.remove();
         }, 500);
     }
 
     if (time != "inf") {
         setTimeout(function() {
-            popup_message.classList.remove("show");
+            popup_message_body.classList.remove("show");
             setTimeout(function() {
-                popup_message.remove();
+                popup_message_body.remove();
             }, 500);
         }, time * 1000);
     }
@@ -309,11 +305,14 @@ function sendToServerRegData(regForm) {
     if (activeRegCheck) {
         sendAJAXRequest("../php/validation_form/reg.php", false, "reg-form").then(function(result) {
             if (result.reply) {
-                createMessage("Регистрация", "Аккаунт успешно зарегистрирован", "inf");
+                createMessage("Регистрация", "Аккаунт успешно зарегистрирован", "10");
+                regForm.reset();
             } else {
-                createMessage("Регистрация", "Аккаунт не зарегистрирован", "inf", "danger");
+                createMessage("Регистрация", "Аккаунт не зарегистрирован", "10", "danger");
             }
         });
+    } else {
+        createMessage("Регистрация", "Неверный формат данных", "5", "danger");
     }
 }
 
@@ -382,8 +381,6 @@ function sendAJAXRequest(url = false, request = false, form = false) {
     return new Promise(function(succeed, fail) {
         if (url == false) return false;
 
-        console.log(typeof form);
-
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -411,6 +408,7 @@ function sendAJAXRequest(url = false, request = false, form = false) {
         xhr.addEventListener("load", function() {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
+                    console.log(xhr.responseText);
                     succeed(JSON.parse(xhr.responseText));
                     getAJAXRequest(JSON.parse(xhr.responseText));
                 } else {

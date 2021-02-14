@@ -13,31 +13,31 @@
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-vk"></i>
+                        <img class="footer__social-web-img" src="../img/social/009-vk.png" alt="">
                     </a>
                 </div>
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-facebook-f"></i>
+                        <img class="footer__social-web-img" src="../img/social/007-whatsapp.png" alt="">
                     </a>
                 </div>
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-instagram"></i>
+                        <img class="footer__social-web-img" src="../img/social/013-twitter-1.png" alt="">
                     </a>
                 </div>
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-twitter"></i>
+                        <img class="footer__social-web-img" src="../img/social/034-instagram.png" alt="">
                     </a>
                 </div>
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-discord"></i>
+                        <img class="footer__social-web-img" src="../img/social/045-facebook.png" alt="">
                     </a>
                 </div>
 

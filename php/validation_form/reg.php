@@ -10,21 +10,28 @@ $login            = $DATA["_login"];
 $phone            = $DATA['_phone'];
 $password         = $DATA['_password'];
 $password_confirm = $DATA['_password_confirm'];
-$accountType      = "admin";
+$org_type         = $DATA['_org_type'];
+$acc_type         = "admin";
 
-$link    = mysqli_connect("localhost","root", "", "foodday");
-$registr = checkNoteByAttribute("foodday", "users", "_email", $email);
-
-if ($registr == false) {
-    $sql = "INSERT INTO `users` ( `_login` , `_password` , `_email` , `_phone` , `account_type`) VALUES ('$login' , '$password' , '$email' , '$phone' , '$accountType')";
+if ($password == $password_confirm) {
+    $link = connect_mysql(HOST, USER, PASSWORD, BD);
+    $sql = "SELECT * FROM `admin` WHERE ( `_login` LIKE '$login' AND `_email` LIKE '$email' )";
     $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
-    mysqli_close($link);
 
-    sendReply(toArray("reply", true)); 
-}
-else {
+    $array = $result->fetch_assoc();
+
+    if (count($array) == 0) {
+        $sql = "INSERT INTO `admin` ( `_name` , `_login` , `_email` , `_phone` , `_password` , `_org_type` , `_acc_type`) VALUES ('$name' , '$login' , '$email' , '$phone' , '$password' , '$org_type' , '$acc_type')";
+        $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+
+        sendReply(toArray("reply", true)); 
+    } else {
+        sendReply(toArray("reply", false)); 
+    }
+    
     mysqli_close($link);
-    sendReply(toArray("reply", false)); 
 }
+else sendReply(toArray("reply", false)); 
+
 
 ?>

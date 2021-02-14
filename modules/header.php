@@ -31,7 +31,7 @@ if ($Authorized == null || $Authorized == "false") {$Authorized = false;} else {
         if ($Authorized == false):
         ?>
         <div>
-            <a class="btn btn-outline-light" href="">Войти</a>
+            <a class="btn btn-outline-light" href="../pages/login.php">Войти</a>
         </div>
 
         <?php else: ?>

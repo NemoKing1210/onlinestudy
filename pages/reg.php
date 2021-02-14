@@ -9,7 +9,7 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 <html lang="ru">
 
 <head>
-    <title>Главное</title>
+    <title>Регистрация</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -23,6 +23,10 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 <body onload="loadData();" onresize="onResizeWindow();">
 
     <div id="root">
+
+        <div id="popup-container" class="popup-container">
+            <div id="popup-body" class="popup-container__body"></div>
+        </div>
 
         <!--------------------------------------- HEADER ------------------------------------->
 
@@ -95,11 +99,11 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
                     </div>
 
-                    <div class="form-row align-items-end">
+                    <div class="form-row align-items-end mb-2">
 
                         <div class="col-6">
                             <label>Тип учреждения</label>
-                            <select class="form-control input-contrast" name="_type">
+                            <select class="form-control input-contrast" name="_org_type">
                                 <option value="1" selected>Университет</option>
                             </select>
                         </div>
@@ -124,8 +128,6 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
 
         <!--------------------------------------- FOOTER ------------------------------------->
-
-        <?php require_once "../modules/footer.php"?>
 
         <button id="btn-goup" class="btn-goup"><i class="fas fa-arrow-up"></i></button>
 
