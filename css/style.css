@@ -562,6 +562,10 @@ body.loaded {
     border-top: 1px solid #efefef;
 }
 
+.footer__img {
+    height: 100%;
+}
+
 .footer__info {
     padding: 1rem;
     display: flex;
@@ -589,19 +593,20 @@ body.loaded {
 
 .footer__social-web-box {
     margin-right: .5rem;
-    display: flex;
-    justify-content: center;
     border-radius: 4px;
     background-color: #f6f6f6;
     cursor: pointer;
     width: 32px;
     height: 32px;
-    padding-top: 3px;
+    padding: 3px;
     box-sizing: border-box;
 }
 
 .footer__social-web-a {
     color: #a2a2a2;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 .footer__copyright {

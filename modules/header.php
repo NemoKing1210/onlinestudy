@@ -18,7 +18,7 @@ if ($Authorized == null || $Authorized == "false") {$Authorized = false;} else {
 
         <div class="navbar-nav mr-auto">
             <a class="nav-link" href="../index.php">Главное</a>
-            <a class="nav-link" href="../about.php">О нас</a>
+            <a class="nav-link" href="../pages/about.php">О нас</a>
             <a class="nav-link" href="../pages/news.php">Новости</a>
             <?php if ($Authorized == false): ?>
             <a class="nav-link" href="../pages/reg.php">Регистрация</a>

@@ -13,31 +13,31 @@
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-vk"></i>
+                    <img src="../img/social/discord.png" class="footer__img" alt="">
                     </a>
                 </div>
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-facebook-f"></i>
+                    <img src="../img/social/007-whatsapp.png" class="footer__img" alt="">
                     </a>
                 </div>
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-instagram"></i>
+                    <img src="../img/social/009-vk.png" class="footer__img" alt="">
                     </a>
                 </div>
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-twitter"></i>
+                    <img src="../img/social/045-facebook.png" class="footer__img" alt="">
                     </a>
                 </div>
 
                 <div class="footer__social-web-box">
                     <a class="footer__social-web-a" href="#">
-                        <i class="fab fa-discord"></i>
+                    <img src="../img/social/034-instagram.png" class="footer__img" alt="">
                     </a>
                 </div>
 
@@ -48,7 +48,7 @@
     </div>
 
     <div class="footer__copyright">
-        © 2009–2020, ООО «FOODDAY», официальный сайт
+        © 2009–2021 «OnlineStudy», официальный сайт
         <a href="agreement.php" class="footer__copyright-agreement">Пользовательское соглашение</a>
     </div>
 </footer>
