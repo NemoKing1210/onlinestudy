@@ -22,6 +22,8 @@ if ($Authorized == null || $Authorized == "false") {$Authorized = false;} else {
             <a class="nav-link" href="../pages/news.php">Новости</a>
             <?php if ($Authorized == false): ?>
             <a class="nav-link" href="../pages/reg.php">Регистрация</a>
+            <?php else: ?>
+            <a class="nav-link" href="../pages/cabinet.php">Личный кабинет</a>
             <?endif;?>
 
         </div>
@@ -36,7 +38,7 @@ if ($Authorized == null || $Authorized == "false") {$Authorized = false;} else {
 
         <?php else: ?>
         <div>
-            <a class="btn btn-outline-light" href="">Выйти</a>
+            <a class="btn btn-outline-light" href="../php/validation_form/logout.php">Выйти</a>
         </div>
         <?php endif;?>
 

@@ -167,7 +167,6 @@ function createMessage(title, text, time = 5, type = false) {
             </div>
             <div class="popup-message__content">${text}</div>
         </div>
-    
     `;
 
     var popup_message = createHTML(popup_message_str);
@@ -200,24 +199,12 @@ function createMessage(title, text, time = 5, type = false) {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function loadData() {
-
     document.body.classList.add('loaded');
     onResizeWindow();
 
     setActiveLink();
     setGoUpButton();
     checkCookies();
-
-    // if (document.getElementById("basket-bar")) {
-    //     sendAJAXRequest("php/handler.php", toArray("FUNCTION", "createBasketList", "IdUser", Cookies.get("ID"))).then(function(result) {
-    //         result["ARRAY"].forEach((elem) => {
-    //             var basket_card = new BasketCard(elem);
-    //         });
-    //     }, function(error) {
-    //         console.log(error);
-    //     });
-    // }
-
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -305,14 +292,14 @@ function sendToServerRegData(regForm) {
     if (activeRegCheck) {
         sendAJAXRequest("../php/validation_form/reg.php", false, "reg-form").then(function(result) {
             if (result.reply) {
-                createMessage("Регистрация", "Аккаунт успешно зарегистрирован", "10");
+                createMessage("Регистрация", "Аккаунт успешно зарегистрирован", 10);
                 regForm.reset();
             } else {
-                createMessage("Регистрация", "Аккаунт не зарегистрирован", "10", "danger");
+                createMessage("Регистрация", "Аккаунт не зарегистрирован", 10, "danger");
             }
         });
     } else {
-        createMessage("Регистрация", "Неверный формат данных", "5", "danger");
+        createMessage("Регистрация", "Неверный формат данных", 5, "danger");
     }
 }
 

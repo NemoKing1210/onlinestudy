@@ -39,18 +39,25 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
         <main id="content" class="container-xl p-4 bg-transparent">
 
-            <form id="login-form" class="box box__login p-4" action="php/validation_form/authorization.php"
-                method="POST">
+            <form id="login-form" class="box box__login p-4" action="../php/validation_form/login.php" method="POST">
                 <h5 class="h5 text-center font-weight-bold">Войти в аккаунт</h5>
 
                 <hr>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="_email" placeholder="Электронная почта">
+                    <label>Тип аккаунта</label>
+                    <select class="form-control input-contrast" name="_type">
+                        <option value="1" selected>Администратор</option>
+                        <option value="2">Пользователь</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <input type="password" class="form-control" name="_password" placeholder="Пароль">
+                    <input type="text" class="form-control input-contrast" name="_login" placeholder="Логин">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control input-contrast" name="_password" placeholder="Пароль">
                     <small class="form-text text-muted">Никому не говорите свой пароль</small>
                 </div>
 
@@ -60,7 +67,7 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
                 <div class="form-group mb-3">
                     <div class="custom-control custom-checkbox mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" name="remember_me"
+                        <input type="checkbox" class="custom-control-input" name="_remember_me"
                             id="customControlAutosizing">
                         <label class="custom-control-label" for="customControlAutosizing">Запомнить меня</label>
                     </div>
