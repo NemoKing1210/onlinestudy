@@ -207,6 +207,11 @@ body.loaded {
     text-transform: uppercase;
 }
 
+.box__reg {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
 
 /*--------------------- OTHER ---------------------*/
 
