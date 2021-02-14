@@ -33,22 +33,20 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
         <!--------------------------------------- CONTENT ------------------------------------->
 
-        <main id="content" class="container-xl p-4 bg-transparent">
+        <main id="content" class="container-xl p-4">
+            <h3 class="h3 m-3">Новости OnlineStudy</h3>
 
-            <div class="box box__reg">
 
-                <h3 class="h3 m-3">Новости OnlineStudy</h3>
-
-                <hr>
-
-                    <form>
-                        <div class="news-container__card">
-                        <div class="news-container__title">Первых вдох</div>
-                        <div class="new-container__date">14.02.2021</div>
-                        </div>
-                    </form>
+            <div class="news-container__card">
+                <div class="news-container__header">
+                    <div class="news-container__title">Первых вдох</div>
+                    <div class="new-container__date">14.02.2021</div>
+                </div>
 
             </div>
+
+
+
 
 
 
