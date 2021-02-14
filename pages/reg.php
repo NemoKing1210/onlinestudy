@@ -13,7 +13,7 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="../images/logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/logo/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
 
@@ -47,14 +47,14 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
                         <label>Название вашего учреждения</label>
                         <input type="text" class="form-control input-contrast" name="_name" validation
                             data-reg-type="name">
-
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="form-group">
                         <label>Имя администратора</label>
                         <input type="text" class="form-control input-contrast" name="_login" validation
                             data-reg-type="login">
-
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="form-row mb-3">
@@ -63,12 +63,14 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
                             <label>Электронная почта</label>
                             <input type="text" class="form-control input-contrast" name="_email" validation
                                 data-reg-type="email">
+                            <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="col">
                             <label>Номер телефона</label>
                             <input type="text" class="form-control input-contrast" name="_phone" validation
                                 data-reg-type="phone">
+                            <div class="invalid-feedback"></div>
                         </div>
 
                     </div>
@@ -79,6 +81,7 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
                             <label>Пароль</label>
                             <input type="password" class="form-control input-contrast" name="_password" validation
                                 data-reg-type="password">
+                            <div class="invalid-feedback"></div>
 
                         </div>
 
@@ -86,16 +89,24 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
                             <label>Подтверждение пароля</label>
                             <input type="password" class="form-control input-contrast" name="_password_confirm"
                                 validation data-reg-type="password_confirm">
+                            <div class="invalid-feedback"></div>
 
                         </div>
 
                     </div>
 
-                    <div class="form-row">
+                    <div class="form-row align-items-end">
+
+                        <div class="col-6">
+                            <label>Тип учреждения</label>
+                            <select class="form-control input-contrast" name="_type">
+                                <option value="1" selected>Университет</option>
+                            </select>
+                        </div>
 
                         <div class="col-auto">
-                            <input class="btn btn-outline btn-block" type="button" value="Создать аккаунт"
-                                onclick="registrUser(0);">
+                            <input class="btn btn-outline btn-block" type="button" value="Создать аккаунт" validation
+                                data-reg-type="submit">
                         </div>
                         <div class="col-auto">
                             <input class="btn btn-outline-danger btn-block" type="reset" value="Очистить">

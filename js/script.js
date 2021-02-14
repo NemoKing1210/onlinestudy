@@ -12,9 +12,7 @@ function translateRule(rule, minSize, maxSize) {
     else if (rule == 4) return "Недопустимые символы!";
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-function checkString(text, minSize, maxSize, lang = "en", spec = false, num = false, multiText = false) {
+function validateString(text, minSize, maxSize, lang = "en", spec = false, num = false, multiText = false) {
     var newText = text.toLowerCase();
     var ruleText = "";
 
@@ -36,14 +34,10 @@ function checkString(text, minSize, maxSize, lang = "en", spec = false, num = fa
 
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 function validatePhone(phone) {
     const re = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
     return re.test(String(phone).toLowerCase());
 }
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -232,119 +226,93 @@ function loadData() {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function checkValidInput(object) {
-    var atr = elem.getAttribute("data-reg-type");
-    var textInput, activeRegCheck = false;
-    if (atr == "name") {
-        if (checkString(object.value, 6, 255, "mix", false, false, true) != "valid") {
-            object.classList.add("is-invalid");
-            object.classList.replace("is-valid", "is-invalid");
-            document.getElementById("feedback_login").innerHTML = checkString(object.value, 6, 255, "mix", false, false, true);
-            activeRegCheck = false;
+function checkValidInput(object, form) {
+    var atr = object.getAttribute("data-reg-type");
+    var textInput, validInput = true;
+    if (atr == "name" && validateString(object.value, 6, 255, "mix", false, true, true) != "valid") {
+        validInput = false;
+        textInput = validateString(object.value, 6, 255, "mix", false, false, true);
+    } else if (atr == "login" && validateString(object.value, 6, 255, "en", false, true, false) != "valid") {
+        validInput = false;
+        textInput = validateString(object.value, 6, 255, "en", false, true, false);
+    } else if (atr == "email" && !validateEmail(object.value)) {
+        validInput = false;
+        textInput = "Неправильный формат почты";
+    } else if (atr == "phone" && !validatePhone(object.value)) {
+        validInput = false;
+        textInput = "Неправильный формат телефона";
+    } else if (atr == "password" && validateString(object.value, 6, 255, "en", true, true, false) != "valid") {
+        validInput = false;
+        textInput = validateString(object.value, 6, 255, "en", true, true, false);
+    } else if (atr == "password_confirm") {
+        var password = document.querySelector('[data-reg-type="password"]');
+        if (password.value != object.value) {
+            validInput = false;
+            textInput = "Пароли не совпадают";
         }
     }
-
+    return { textInput: textInput, validInput: validInput };
 }
 
 if (document.getElementById("reg-form")) {
     var regForm = document.getElementById("reg-form");
-
     var validInput = document.querySelectorAll("[validation]");
 
     validInput.forEach(function(elem) {
-        elem.onblur = function() {
-            var atr = elem.getAttribute("data-reg-type");
-            if (atr == "name") {
+        var atr = elem.getAttribute("data-reg-type");
+        if (atr != "submit") {
+            elem.onblur = function() {
+                var result = checkValidInput(elem, regForm);
+                var feedback = elem.parentNode.querySelector(".invalid-feedback");
+                if (!result.validInput) {
+                    elem.classList.add("is-invalid");
+                    elem.classList.remove("is-valid");
+                    if (feedback) {
+                        feedback.innerHTML = result.textInput;
+                    }
+                } else {
+                    elem.classList.add("is-valid");
+                    elem.classList.remove("is-invalid");
+                }
+            }
+        } else {
+            elem.onclick = function() {
+                sendToServerRegData(regForm);
+            }
+        }
+    });
+}
 
-            }
-            if (checkString(form._login.value, 6, 255, "mix", false, false, true) != "valid") {
-                form._login.classList.add("is-invalid");
-                form._login.classList.replace("is-valid", "is-invalid");
-                document.getElementById("feedback_login").innerHTML = checkString(form._login.value, 6, 255, "mix", false, false, true);
+function sendToServerRegData(regForm) {
+    var activeRegCheck = true;
+    var validInput = document.querySelectorAll("[validation]");
+
+    validInput.forEach(function(elem) {
+        var atr = elem.getAttribute("data-reg-type");
+        if (atr != "submit") {
+            var result = checkValidInput(elem, regForm);
+            var feedback = elem.parentNode.querySelector(".invalid-feedback");
+            if (!result.validInput) {
                 activeRegCheck = false;
+                elem.classList.add("is-invalid");
+                elem.classList.remove("is-valid");
+                if (feedback) {
+                    feedback.innerHTML = result.textInput;
+                }
             } else {
-                form._login.classList.replace("is-invalid", "is-valid");
-                form._login.classList.add("is-valid");
+                elem.classList.add("is-valid");
+                elem.classList.remove("is-invalid");
             }
-            console.log("Вышел из элемента:", elem);
         }
     });
 
-}
-
-function checkRegData(atr) {
-    var activeRegCheck = true;
-    var form = document.getElementById("register-form");
-
-    if (atr == 0 || atr == 1) {
-        if (checkString(form._login.value, 6, 255, "mix", false, false, true) != "valid") {
-            form._login.classList.add("is-invalid");
-            form._login.classList.replace("is-valid", "is-invalid");
-            document.getElementById("feedback_login").innerHTML = checkString(form._login.value, 6, 255, "mix", false, false, true);
-            activeRegCheck = false;
-        } else {
-            form._login.classList.replace("is-invalid", "is-valid");
-            form._login.classList.add("is-valid");
-        }
-    }
-
-    if (atr == 0 || atr == 2) {
-        if (!validateEmail(form._email.value)) {
-            form._email.classList.add("is-invalid");
-            form._email.classList.replace("is-valid", "is-invalid");
-            document.getElementById("feedback_email").innerHTML = "Неправильный формат почты";
-            activeRegCheck = false;
-        } else {
-            form._email.classList.replace("is-invalid", "is-valid");
-            form._email.classList.add("is-valid");
-        }
-    }
-
-    if (atr == 0 || atr == 3) {
-        if (!validatePhone(form._phone.value)) {
-            form._phone.classList.add("is-invalid");
-            form._phone.classList.replace("is-valid", "is-invalid");
-            document.getElementById("feedback_phone").innerHTML = "Неправильный формат телефона";
-            activeRegCheck = false;
-        } else {
-            form._phone.classList.replace("is-invalid", "is-valid");
-            form._phone.classList.add("is-valid");
-        }
-    }
-
-    if (atr == 0 || atr == 4) {
-        if (checkString(form._password_1.value, 6, 255, "en", true, true, false) != "valid") {
-            form._password_1.classList.add("is-invalid");
-            form._password_1.classList.replace("is-valid", "is-invalid");
-            document.getElementById("feedback_password_1").innerHTML = checkString(form._password_1.value, 6, 255, "en", true, true, false);
-            activeRegCheck = false;
-        } else {
-            form._password_1.classList.replace("is-invalid", "is-valid");
-            form._password_1.classList.add("is-valid");
-        }
-    }
-
-    if (atr == 0 || atr == 5) {
-        if (form._password_1.value != form._password_2.value) {
-            form._password_2.classList.add("is-invalid");
-            form._password_2.classList.replace("is-valid", "is-invalid");
-            document.getElementById("feedback_password_2").innerHTML = "Пароли не совпадают!";
-            activeRegCheck = false;
-        } else {
-            form._password_2.classList.replace("is-invalid", "is-valid");
-            form._password_2.classList.add("is-valid");
-        }
-    }
-
-    if (activeRegCheck && atr == 0) {
-        sendAJAXRequest("php/validation_form/registration.php", false, "register-form").then(function(result) {
-            if (result["reply"]) {
+    if (activeRegCheck) {
+        sendAJAXRequest("../php/validation_form/reg.php", false, "reg-form").then(function(result) {
+            if (result.reply) {
                 createMessage("Регистрация", "Аккаунт успешно зарегистрирован", "inf");
             } else {
                 createMessage("Регистрация", "Аккаунт не зарегистрирован", "inf", "danger");
             }
-        }, function(error) {
-            console.log(error);
         });
     }
 }
@@ -413,6 +381,8 @@ function getAJAXRequest(message = false) {
 function sendAJAXRequest(url = false, request = false, form = false) {
     return new Promise(function(succeed, fail) {
         if (url == false) return false;
+
+        console.log(typeof form);
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
