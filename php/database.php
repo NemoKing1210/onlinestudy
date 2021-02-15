@@ -29,7 +29,7 @@ function resultToArray($result)
 function getTableArrayByAttribute($BD, $TABLE, $ATTRIBUTE, $VALUE, $CONDITION = "==")
 {
     $CONDITION = strtolower($CONDITION);
-    $link = connect_mysql("localhost", "root", "", $BD);
+    $link = connect_mysql(HOST, USER, PASSWORD, $BD);
     $sql;
 
     if ($CONDITION == "==" or $CONDITION == "like") {
@@ -54,7 +54,7 @@ function getTableArrayByAttribute($BD, $TABLE, $ATTRIBUTE, $VALUE, $CONDITION = 
 
 function getTableArray($BD, $TABLE)
 {
-    $link = connect_mysql("localhost", "root", "", $BD);
+    $link = connect_mysql(HOST, USER, PASSWORD, $BD);
     $sql = "SELECT * FROM $TABLE";
     $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
 
@@ -65,7 +65,7 @@ function getTableArray($BD, $TABLE)
 
 function checkNoteByAttribute($BD, $TABLE, $ATTRIBUTE, $VALUE)
 {
-    $link = connect_mysql("localhost", "root", "", $BD);
+    $link = connect_mysql(HOST, USER, PASSWORD, $BD);
     $sql = "SELECT * FROM $TABLE WHERE ( $ATTRIBUTE Like '$VALUE' )";
     $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
 
@@ -78,7 +78,7 @@ function checkNoteByAttribute($BD, $TABLE, $ATTRIBUTE, $VALUE)
 
 function deleteNoteByAttribute($BD, $TABLE, $ATTRIBUTE, $VALUE)
 {
-    $link = connect_mysql("localhost", "root", "", $BD);
+    $link = connect_mysql(HOST, USER, PASSWORD, $BD);
     $sql = "DELETE FROM $TABLE WHERE $ATTRIBUTE = '$VALUE';";
     $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
 
@@ -87,7 +87,7 @@ function deleteNoteByAttribute($BD, $TABLE, $ATTRIBUTE, $VALUE)
 
 function updateNoteByAttribute($BD, $TABLE, $ATTRIBUTE1, $VALUE1, $ATTRIBUTE2, $VALUE2)
 {
-    $link = connect_mysql("localhost", "root", "", $BD);
+    $link = connect_mysql(HOST, USER, PASSWORD, $BD);
     $sql = "UPDATE $TABLE SET $ATTRIBUTE2 = '$VALUE2' WHERE $ATTRIBUTE1 = '$VALUE1';";
     $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
 

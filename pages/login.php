@@ -88,7 +88,9 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
         <!--------------------------------------- FOOTER ------------------------------------->
 
-        <button id="btn-goup" class="btn-goup"><i class="fas fa-arrow-up"></i></button>
+        <button id="btn-goup" class="btn-goup">
+            <img class="btn-goup__img" src="/img/icons/goup.png" alt="">
+        </button>
 
     </div>
 

@@ -95,31 +95,32 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
 
                     </div>
 
-                    <div class="middle__main-content-down form-row">
+                    <form id="add-user-form" class="middle__main-content-down form-row">
 
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Фамилия">
+                            <input type="text" name="s-name" class="form-control" placeholder="Фамилия">
                         </div>
 
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Имя">
+                            <input type="text" name="f-name" class="form-control" placeholder="Имя">
                         </div>
 
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Отчество">
+                            <input type="text" name="d-name" class="form-control" placeholder="Отчество">
                         </div>
 
                         <div class="col input-group">
-                            <select class="form-control">
+                            <select name="type-user" class="form-control">
                                 <option value="1">Студент</option>
                                 <option value="2">Ведущий</option>
                             </select>
                             <div class="input-group-append">
-                                <button class="btn btn-primary btn-block" onclick="addNewUser();">Добавить</button>
+                                <input value="Добавить" type="button" class="btn btn-primary btn-block"
+                                    onclick="addNewUser();">
                             </div>
                         </div>
 
-                    </div>
+                    </form>
 
                 </div>
 
@@ -128,7 +129,9 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
 
         <!--------------------------------------- FOOTER ------------------------------------->
 
-        <button id="btn-goup" class="btn-goup"><i class="fas fa-arrow-up"></i></button>
+        <button id="btn-goup" class="btn-goup">
+            <img class="btn-goup__img" src="/img/icons/goup.png" alt="">
+        </button>
 
     </div>
 

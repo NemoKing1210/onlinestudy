@@ -199,6 +199,16 @@ function createMessage(title, text, time = 5, type = false) {
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function addNewUser() {
+    var form = document.getElementById("add-user-form");
+
+    sendAJAXRequest("../php/handler.php", toArray("FUNCTION", "addNewUser", "ID", Cookies.get("ID")), "add-user-form").then(function(result) {
+        if (result.reply) {
+            createMessage("Учетные записи", "Аккаунт успешно добавлен", 10);
+        } else {
+            createMessage("Учетные записи", result, "inf", "danger");
+        }
+    });
+
     console.log("addNewUser");
 }
 

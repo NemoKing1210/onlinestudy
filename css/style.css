@@ -231,7 +231,7 @@ body.loaded {
 
 .middle__main-content {
     display: grid;
-    grid-template-rows: 70px calc(100% - 130px) 60px;
+    grid-template-rows: 70px calc(100% - 130px) 30px;
     grid-auto-rows: auto;
     height: calc(100% - 48px);
 }
@@ -271,6 +271,7 @@ body.loaded {
     background: #dadada;
     padding: .5rem;
     transition: transform .3s, opacity .5s;
+    border-bottom: 5px solid #b5b5b5;
 }
 
 .btn-goup__img {
@@ -408,10 +409,21 @@ body.loaded {
     max-width: 90%;
 }
 
+.popup-message__close-button:hover {
+    background: #d6d6d6;
+    color: black;
+    font-weight: 600;
+    opacity: 1;
+}
+
 .popup-message__close-button {
     background: transparent;
     border: transparent;
     opacity: 0.6;
+    width: 26px;
+    display: block;
+    border-radius: .5rem;
+    transition: background-color .3s;
 }
 
 .popup-message__close-button:focus {

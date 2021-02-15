@@ -70,11 +70,6 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
             </div>
 
-
-
-
-
-
         </main>
 
 
@@ -82,7 +77,9 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
         <?php require_once "../modules/footer.php"?>
 
-        <button id="btn-goup" class="btn-goup"><i class="fas fa-arrow-up"></i></button>
+        <button id="btn-goup" class="btn-goup">
+            <img class="btn-goup__img" src="/img/icons/goup.png" alt="">
+        </button>
 
     </div>
 
