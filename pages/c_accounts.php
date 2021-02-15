@@ -1,8 +1,9 @@
 <?php require_once "../php/functions.php";
 $Authorized = $_COOKIE["Authorized"];
-$ONLYUSER = true;
+$ONLYUSER = true; $ONLYADMIN = true;
 if ($Authorized == null || $Authorized == "false") {$Authorized = false;} else { $Authorized = true;}
 if ($ONLYUSER && !$Authorized) header("Location: /");
+if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
 ?>
 
 <!DOCTYPE html>
@@ -35,14 +36,14 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
         <!--------------------------------------- CONTENT ------------------------------------->
 
-        <main id="content" class="">
+        <main id="content" class="content-2">
             <div class="sidebar">
 
                 <?php
                     $AccountType = $_COOKIE["AccountType"];
 
                     $array = array(
-                        "Учетные записи" => array("admin", "1"),
+                        "Учетные записи" => array("admin", "c_accounts.php"),
                         "Рабочие группы" => array("admin", "2"),
                         "Управление расписанием" => array("admin", "3"),
                         "Управление предметами" => array("admin", "4"),
@@ -55,13 +56,87 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
                     foreach ($array as $key => $value):
                     if ($value[0] == $AccountType || $value[0] == "all"):
                 ?>
-                <a class="sidebar__button" href="#?page=<? echo $value[1]; ?>">
+                <a class="sidebar__button" href="<? echo $value[1]; ?>">
                     <? echo $key; ?>
                 </a>
                 <? endif; ?>
                 <? endforeach; ?>
             </div>
 
+            <div class="middle">
+
+
+                <div class="middle__top-menu">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="cabinet.php">Личный кабинет</a></li>
+                            <li class="breadcrumb-item active">Учетные записи</li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <div class="middle__main-content">
+                    <div class="middle__main-content-up form-row">
+
+                        <div class="col">
+                            <label>Тип пользователя</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option value="3">Студент</option>
+                                <option value="2">Ведущий</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label>Рабочая группа</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6">
+                            <label>Поиск по ФИО</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" id="button-addon2">Поиск</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="box middle__main-content-center my-4">
+
+
+                    </div>
+
+                    <div class="middle__main-content-down form-row">
+
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Фамилия">
+                        </div>
+
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Имя">
+                        </div>
+
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Отчество">
+                        </div>
+
+                        <div class="col-auto">
+                            <button class="btn btn-primary btn-block">Добавить</button>
+                        </div>
+
+                    </div>
+
+                </div>
 
         </main>
 

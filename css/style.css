@@ -44,8 +44,8 @@ body.loaded {
 
 .btn,
 .form-control {
-    border-radius: .5rem !important;
-    font-weight: 500 !important;
+    border-radius: .5rem;
+    font-weight: 500;
 }
 
 .form-control:focus {
@@ -217,6 +217,24 @@ body.loaded {
 
 
 /*--------------------- OTHER ---------------------*/
+
+.content-2 {
+    display: grid;
+    grid-template-columns: 300px calc(100% - 300px);
+}
+
+.middle {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.middle__main-content {
+    display: grid;
+    grid-template-rows: 70px calc(100% - 130px) 60px;
+    grid-auto-rows: auto;
+    height: calc(100% - 48px);
+}
 
 .content-top-img {
     background: url("/img/content/main_3.webp");
