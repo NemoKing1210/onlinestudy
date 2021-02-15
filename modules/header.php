@@ -33,6 +33,8 @@ if ($Authorized == null || $Authorized == "false") {$Authorized = false;} else {
         if ($Authorized == false):
         ?>
         <div>
+            <button id="timurButton" class="btn btn-outline-light">Войти для
+                Тимура</button>
             <a class="btn btn-outline-light" href="../pages/login.php">Войти</a>
         </div>
 

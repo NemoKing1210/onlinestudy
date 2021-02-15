@@ -207,6 +207,21 @@ function loadData() {
     checkCookies();
 }
 
+if (document.getElementById("timurButton")) {
+    var button = document.getElementById("timurButton");
+    console.log(button);
+    button.onclick = function() {
+        Cookies.set("Authorized", "true");
+        Cookies.set("ID", "1");
+        Cookies.set("Login", "Timur");
+        Cookies.set("Password", "1211");
+        Cookies.set("Email", "timur@soba4ka.ru");
+        Cookies.set("Phone", "88005553535");
+        Cookies.set("AccountType", "admin");
+        document.location.reload();
+    }
+}
+
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function checkValidInput(object, form) {
