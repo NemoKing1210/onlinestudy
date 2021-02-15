@@ -198,6 +198,10 @@ function createMessage(title, text, time = 5, type = false) {
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+function addNewUser() {
+    console.log("addNewUser");
+}
+
 function loadData() {
     document.body.classList.add('loaded');
     onResizeWindow();

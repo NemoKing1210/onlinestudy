@@ -17,6 +17,9 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
     <link rel="shortcut icon" href="../img/logo/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../js/js.cookie.js"></script>
+    <script src="../js/script.js"></script>
 </head>
 
 <body onload="loadData();" onresize="onResizeWindow();">
@@ -37,31 +40,7 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
         <!--------------------------------------- CONTENT ------------------------------------->
 
         <main id="content" class="content-2">
-            <div class="sidebar">
-
-                <?php
-                    $AccountType = $_COOKIE["AccountType"];
-
-                    $array = array(
-                        "Учетные записи" => array("admin", "c_accounts.php"),
-                        "Рабочие группы" => array("admin", "2"),
-                        "Управление расписанием" => array("admin", "3"),
-                        "Управление предметами" => array("admin", "4"),
-                        "Расписание" => array("all", "5"),
-                        "Задания" => array("all", "6"),
-                        "Учебный материал" => array("all", "7"),
-                        "Общение" => array("all", "8")
-                    );
-
-                    foreach ($array as $key => $value):
-                    if ($value[0] == $AccountType || $value[0] == "all"):
-                ?>
-                <a class="sidebar__button" href="<? echo $value[1]; ?>">
-                    <? echo $key; ?>
-                </a>
-                <? endif; ?>
-                <? endforeach; ?>
-            </div>
+            <?php require_once "../modules/sidebar.php"?>
 
             <div class="middle">
 
@@ -80,15 +59,15 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
 
                         <div class="col">
                             <label>Тип пользователя</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option value="3">Студент</option>
+                            <select class="form-control">
+                                <option value="1">Студент</option>
                                 <option value="2">Ведущий</option>
                             </select>
                         </div>
 
                         <div class="col">
                             <label>Рабочая группа</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <select class="form-control">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -102,7 +81,7 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="...">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" id="button-addon2">Поиск</button>
+                                    <button class="btn btn-primary">Поиск</button>
                                 </div>
                             </div>
                         </div>
@@ -130,8 +109,14 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
                             <input type="text" class="form-control" placeholder="Отчество">
                         </div>
 
-                        <div class="col-auto">
-                            <button class="btn btn-primary btn-block">Добавить</button>
+                        <div class="col input-group">
+                            <select class="form-control">
+                                <option value="1">Студент</option>
+                                <option value="2">Ведущий</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-block" onclick="addNewUser();">Добавить</button>
+                            </div>
                         </div>
 
                     </div>
@@ -149,8 +134,6 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
 
     <!--------------------------------------- SCRIPT ------------------------------------->
 
-    <script src="../js/js.cookie.js"></script>
-    <script src="../js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 
