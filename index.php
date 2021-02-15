@@ -33,14 +33,13 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
 
         <!--------------------------------------- CONTENT ------------------------------------->
 
-        <main id="content" class="container-xl p-0">
+        <main id="content" class="container-xl p-4">
 
-            <div class="content-top-img"></div>
-
-
-            <div class="p-4">
-                <div class="alert alert-secondary">
-                    <h4 class="alert-heading">Lorem, ipsum.</h4>
+            <div class="box">
+                <div class="box__header">
+                    <h4 class="h4 m-0">Lorem, ipsum.</h4>
+                </div>
+                <div class="p-4">
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo cum placeat, adipisci beatae,
                         accusantium, dignissimos laboriosam illo nulla ex quibusdam facilis. Debitis quidem sint vel, ea
                         error, facilis assumenda fugiat animi fuga placeat minima. Magni expedita, libero nisi vitae
@@ -52,6 +51,7 @@ if ($ONLYUSER && !$Authorized) header("Location: /");
                     </a>
                 </div>
             </div>
+
 
 
 

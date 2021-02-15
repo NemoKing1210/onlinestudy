@@ -141,6 +141,17 @@ body.loaded {
     background: #FAFBFC;
 }
 
+.bd-title {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    font-size: 3rem;
+}
+
+.bd-lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
 
 /*--------------------- BOX ---------------------*/
 
@@ -234,13 +245,6 @@ body.loaded {
     grid-template-rows: 70px calc(100% - 130px) 30px;
     grid-auto-rows: auto;
     height: calc(100% - 48px);
-}
-
-.content-top-img {
-    background: url("/img/content/main_3.webp");
-    background-repeat: repeat;
-    width: 100%;
-    height: 400px;
 }
 
 .d-grid {

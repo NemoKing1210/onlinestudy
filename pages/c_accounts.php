@@ -92,6 +92,9 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
 
                     <div class="box middle__main-content-center my-4">
 
+                        <div class="">
+
+                        </div>
 
                     </div>
 
@@ -111,7 +114,7 @@ if ($ONLYADMIN && $_COOKIE["AccountType"] != "admin") header("Location: /");
 
                         <div class="col input-group">
                             <select name="type-user" class="form-control">
-                                <option value="1">Студент</option>
+                                <option value="1">Ученик</option>
                                 <option value="2">Ведущий</option>
                             </select>
                             <div class="input-group-append">

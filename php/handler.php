@@ -9,6 +9,7 @@ $FUNCTION = $DATA["FUNCTION"];
 
 $FUNC_LIST = array(
     'addNewUser',
+    'getTableLearnerAndTeacher'
 );
 
 $searchFunc = false;
@@ -91,30 +92,70 @@ function addNewUser($DATA) {
     $d_name = $DATA["d-name"];
     $type_user = $DATA["type-user"];
 
+    $fullName = $s_name . " " . $f_name . " " . $d_name;
+
     $ID = $DATA["ID"];
 
-    if ($s_name == "" || $f_name == "") {
+    if ( !empty($s_name) || !empty($а_name)) {
         if (checkNoteByAttribute("onlinestudy", "admin", "id", $ID)) {
 
             if ($type_user == "1") {
                 $added = false;
-                $loginAndPassword = createRandomLoginAndPassword($DATA);
-
-                $link = connect_mysql(HOST, USER, PASSWORD, BD);
-                $sql    = "SELECT * FROM `admin` WHERE ( `_login` Like '$login' AND `_password` Like '$password')";
-                $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
                 
                 while ($added == false) {
 
+                    $loginAndPassword = createRandomLoginAndPassword($DATA);
+                    $login = $loginAndPassword[0];
+                    $password = $loginAndPassword[1];
 
+                    $link   = connect_mysql(HOST, USER, PASSWORD, BD);
+                    $sql    = "SELECT * FROM `learner` WHERE ( `_login` Like '$login' AND `_password` Like '$password')";
+                    $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+                    
+                    $user = $result->fetch_assoc();
+                    mysqli_close($link);
+                    
+                    if (count($user) == 0) {
+                        $link   = connect_mysql(HOST, USER, PASSWORD, BD);
+                        $sql = "INSERT INTO `learner` ( `_login` , `_fullname` , `_password` , `id_admin` ) VALUES ( '$login' , '$fullName' , '$password' , '$ID')";
+                        $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+                        mysqli_close($link);
+                        $added = true;
+                    }
 
                 }
 
             }
             elseif ($type_user == "2") {
 
+                $added = false;
+                
+                while ($added == false) {
+
+                    $loginAndPassword = createRandomLoginAndPassword($DATA);
+                    $login = $loginAndPassword[0];
+                    $password = $loginAndPassword[1];
+
+                    $link   = connect_mysql(HOST, USER, PASSWORD, BD);
+                    $sql    = "SELECT * FROM `teacher` WHERE ( `_login` Like '$login' AND `_password` Like '$password')";
+                    $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+                    
+                    $user = $result->fetch_assoc();
+                    mysqli_close($link);
+                    
+                    if (count($user) == 0) {
+                        $link   = connect_mysql(HOST, USER, PASSWORD, BD);
+                        $sql = "INSERT INTO `teacher` ( `_login` , `_fullname` , `_password` , `id_admin` ) VALUES ( '$login' , '$fullName' , '$password' , '$ID')";
+                        $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
+                        mysqli_close($link);
+                        $added = true;
+                    }
+
+                }
+
             }
             
+            sendReply(toArray("reply", true)); 
     
         }
         else sendReply(toArray("reply", false)); 
@@ -125,6 +166,10 @@ function addNewUser($DATA) {
 
 // !-----------------------------------------------------------------------------------------
 
+function getTableLearnerAndTeacher($DATA) {
 
+
+
+}
 
 // !-----------------------------------------------------------------------------------------

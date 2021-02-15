@@ -205,7 +205,7 @@ function addNewUser() {
         if (result.reply) {
             createMessage("Учетные записи", "Аккаунт успешно добавлен", 10);
         } else {
-            createMessage("Учетные записи", result, "inf", "danger");
+            createMessage("Учетные записи", "Аккаутн не был добавлен", 10, "danger");
         }
     });
 
